@@ -41,7 +41,7 @@ class Hive(object):
                 sleep(1800)
                 continue
             else:
-                print(s)
+                print(s.status_code)
                 api = s.json()
                 break
 
