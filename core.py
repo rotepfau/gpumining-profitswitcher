@@ -116,7 +116,7 @@ def main():
                 'Current flight sheet is not named properly. It should be the same as coins')
     if current_fs == most_profitable_coin:
         if on_production:
-            return os.system(f'message success "{most_profitable_coin}"')
+            return os.system(f'message info "{most_profitable_coin}"')
         else:
             return print("Current flight sheet is already the most profitable coin. Exiting")
     all_fs = cHive.get_all_fs()
@@ -130,7 +130,7 @@ def main():
         'name') == most_profitable_coin][0]
     cHive.set_current_fs(new_fs['id'])
     if on_production:
-        os.system(f'message info "{new_fs["name"]}"')
+        os.system(f'message success "{new_fs["name"]}"')
     else:
         print(f'New flight sheet {new_fs["name"]}')
         print("Done")
