@@ -130,10 +130,10 @@ def main():
         'name') == most_profitable_coin][0]
     cHive.set_current_fs(new_fs['id'])
     if on_production:
-        os.system(f'message info "${new_fs["name"]}"')
+        os.system(f'message info "{new_fs["name"]}"')
     else:
-        print(f'New flight sheet ${new_fs["name"]}')
-    print(f"Done.\n")
+        print(f'New flight sheet {new_fs["name"]}')
+        print("Done")
 
 
 if __name__ == '__main__':
