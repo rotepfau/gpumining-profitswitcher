@@ -116,10 +116,11 @@ def main():
         return print("Most profitable coin not configured. Exiting")
     new_fs = [fs for fs in all_fs if fs.get(
         'name') == most_profitable_coin][0]
-    print("Setting up new flight sheet")
+    print(f'Setting up new flight sheet ${new_fs["name"]}')
+    if not dev_mode:
+        os.system(f'message info "${new_fs["name"]}"')
     cHive.set_current_fs(new_fs['id'])
-    os.system(f'message info "${new_fs["name"]}"')
-    print("Done.")
+    print(f"Done.\n")
 
 
 if __name__ == '__main__':
