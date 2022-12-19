@@ -31,19 +31,24 @@ class Hive(object):
                 s = request(method, 'https://api2.hiveos.farm/api/v2' + command, data=payload, params=params,
                             headers=headers, timeout=100)
             except exceptions.ConnectionError:
-                print('Oops. Connection failed to HiveOs')
+                if not on_production:
+                    print('Oops. Connection failed to HiveOs')
                 sleep(15)
                 continue
             except exceptions.Timeout:
-                print('Oops. Timed out waiting for a response from HiveOs')
+                if not on_production:
+                    print('Oops. Timed out waiting for a response from HiveOs')
                 sleep(15)
                 continue
             except exceptions.TooManyRedirects:
-                print('Oops. Exceeded number of requests from HiveOs, Wait 30 minutes')
+                if not on_production:
+                    print(
+                        'Oops. Exceeded number of requests from HiveOs, Wait 30 minutes')
                 sleep(1800)
                 continue
             else:
-                print(s.status_code)
+                if not on_production:
+                    print(s.status_code)
                 api = s.json()
                 break
 
@@ -53,12 +58,14 @@ class Hive(object):
         return self.api_query('GET', '/farms')
 
     def __get_farm_id_by_name(self, name: str) -> int:
-        print("Getting farm id by name")
+        if not on_production:
+            print("Getting farm id by name")
         farms = self.__get_farms()["data"]
         return next(farm for farm in farms if farm["name"] == name)["id"]
 
     def __get_worker_id_by_name(self, name: str) -> int:
-        print("Getting worker id by name")
+        if not on_production:
+            print("Getting worker id by name")
         workers = self.__get_workers_preview()["data"]
         return next(worker for worker in workers if worker["name"] == name)["id"]
 
@@ -83,13 +90,15 @@ class Whattomine(object):
         pass
 
     def get_most_profitable_coin(self) -> str:
-        print("Getting whattomine data")
+        if not on_production:
+            print("Getting whattomine data")
         req = request("GET", self.url, timeout=100)
         to_json = req.json()
         coins = to_json["coins"]
         most_profitable_coin = next(
             coin for coin in coins if coin in os.environ.get("COINS"))
-        print(f"Most profitable coin: {most_profitable_coin}")
+        if not on_production:
+            print(f"Most profitable coin: {most_profitable_coin}")
         return most_profitable_coin
 
 
