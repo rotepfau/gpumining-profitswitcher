@@ -5,6 +5,8 @@ from requests import request, exceptions
 from dotenv import load_dotenv
 load_dotenv()
 
+dev_mode = False
+
 
 class Hive(object):
 
@@ -97,17 +99,26 @@ def main():
     most_profitable_coin = cWhattomine.get_most_profitable_coin()
     current_fs = cHive.get_current_fs()
     if current_fs not in os.environ.get("COINS"):
+        if not dev_mode:
+            os.system(
+                'message danger "Current flight sheet is not named properly. It should be the same as coins"')
         raise Exception(
-            "Current flight sheet is not named properly. It should be the same as coins")
+            'Current flight sheet is not named properly. It should be the same as coins')
     if current_fs == most_profitable_coin:
+        if not dev_mode:
+            os.system(f'message success "{most_profitable_coin}"')
         return print("Current flight sheet is already the most profitable coin. Exiting")
     all_fs = cHive.get_all_fs()
     if not any(fs['name'] == most_profitable_coin for fs in all_fs):
+        if not dev_mode:
+            os.system(
+                'message danger "Most profitable coin not configured. Exiting"')
         return print("Most profitable coin not configured. Exiting")
-    new_fs_id = [fs for fs in all_fs if fs.get(
-        'name') == most_profitable_coin][0]["id"]
+    new_fs = [fs for fs in all_fs if fs.get(
+        'name') == most_profitable_coin][0]
     print("Setting up new flight sheet")
-    print(cHive.set_current_fs(new_fs_id))
+    cHive.set_current_fs(new_fs['id'])
+    os.system(f'message info "${new_fs["name"]}"')
     print("Done.")
 
 
