@@ -5,7 +5,7 @@ from requests import request, exceptions
 from dotenv import load_dotenv
 load_dotenv()
 
-dev_mode = False
+on_production = True
 
 
 class Hive(object):
@@ -99,27 +99,31 @@ def main():
     most_profitable_coin = cWhattomine.get_most_profitable_coin()
     current_fs = cHive.get_current_fs()
     if current_fs not in os.environ.get("COINS"):
-        if not dev_mode:
-            os.system(
+        if on_production:
+            raise os.system(
                 'message danger "Current flight sheet is not named properly. It should be the same as coins"')
-        raise Exception(
-            'Current flight sheet is not named properly. It should be the same as coins')
+        else:
+            raise Exception(
+                'Current flight sheet is not named properly. It should be the same as coins')
     if current_fs == most_profitable_coin:
-        if not dev_mode:
-            os.system(f'message success "{most_profitable_coin}"')
-        return print("Current flight sheet is already the most profitable coin. Exiting")
+        if on_production:
+            return os.system(f'message success "{most_profitable_coin}"')
+        else:
+            return print("Current flight sheet is already the most profitable coin. Exiting")
     all_fs = cHive.get_all_fs()
     if not any(fs['name'] == most_profitable_coin for fs in all_fs):
-        if not dev_mode:
-            os.system(
+        if on_production:
+            return os.system(
                 'message danger "Most profitable coin not configured. Exiting"')
-        return print("Most profitable coin not configured. Exiting")
+        else:
+            return print("Most profitable coin not configured. Exiting")
     new_fs = [fs for fs in all_fs if fs.get(
         'name') == most_profitable_coin][0]
-    print(f'Setting up new flight sheet ${new_fs["name"]}')
-    if not dev_mode:
-        os.system(f'message info "${new_fs["name"]}"')
     cHive.set_current_fs(new_fs['id'])
+    if on_production:
+        os.system(f'message info "${new_fs["name"]}"')
+    else:
+        print(f'New flight sheet ${new_fs["name"]}')
     print(f"Done.\n")
 
 
