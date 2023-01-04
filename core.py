@@ -5,7 +5,7 @@ import os
 import tomllib
 from sys import platform
 
-with open('config.toml', 'rb') as config_file:
+with open('config.toml' if platform.__contains__('win') else '/home/user/gpumining-profitswitcher/config.toml', 'rb') as config_file:
     config = tomllib.load(config_file)
 
 
