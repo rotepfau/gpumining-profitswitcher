@@ -9,8 +9,8 @@ This script is intend to use on the same machine's rig, but you can launch on an
 ### **_PRE_-INSTALLATION**
 
 1. Go to [WhatToMine](https://whattomine.com), setup all algos and parameters, _calculate_ it, press _JSON_ button on top right page and then copy URL from the page that you got redirected. Paste it somewhere as we will use it later on installation phase
-2. Create every _flight sheet_ you want and nameit _exactly_ how the coin is named on WhatToMine i.e EthereumClassic
-3. Setup all overclock settings and toggle on _Auto Select Algo_ option
+2. On [hiveos](https://the.hiveos.farm), create every _flight sheet_ you want and nameit _exactly_ how the coin is named on WhatToMine i.e EthereumClassic
+3. Still on hiveos, setup all overclock settings and toggle on _Auto Select Algo_ option
 
 ### **INSTALLATION**
 
