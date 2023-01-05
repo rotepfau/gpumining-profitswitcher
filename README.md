@@ -50,7 +50,7 @@ Preferable on the rig machine. You can either start a remote access hive shell o
    nano /hive/etc/crontab.root
    ```
 7. Add this to the end of file<br>
-   ```bash
+   ```vim
    0 * * * * /home/user/gpumining-profitswitcher/.venv/bin/python /home/user/gpumining-profitswitcher/core.py &>> /home/user/crontab-profitswitcher.log
    ```
    \*Keep blank line on very last line of the file or will not work<br>
