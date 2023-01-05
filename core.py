@@ -95,7 +95,7 @@ class Whattomine(object):
 
 
 def main():
-    print(ctime(time))
+    print(ctime(time()))
     cHive = Hive(config['HIVE_API_KEY'])
     cWhattomine = Whattomine(config['WHATTOMINE_JSON'])
     most_profitable_coin = cWhattomine.get_most_profitable_coin()
