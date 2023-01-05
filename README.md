@@ -1,10 +1,8 @@
 ### **ABOUT**
 
-This script is intend to use on the same machine's rig, but you can launch on another\* machine with a small functionallity loss.
+This script is intend to use on the same machine's rig, but you can launch on another\* machine with a small functionallity loss. Tested with python 3.11.1
 
-\*Right now it only support windows as "another" machine
-
-\*\*Tested with python 3.11.1
+\*Right now it only support non-linux as "another" machine
 
 ### **_PRE_-INSTALLATION**
 

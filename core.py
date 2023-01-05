@@ -5,7 +5,7 @@ import os
 import tomllib
 from sys import platform
 
-with open('config.toml' if platform.__contains__('win') else '/home/user/gpumining-profitswitcher/config.toml', 'rb') as config_file:
+with open('config.toml' if not platform.__contains__('linux') else '/home/user/gpumining-profitswitcher/config.toml', 'rb') as config_file:
     config = tomllib.load(config_file)
 
 
@@ -99,25 +99,25 @@ def main():
     most_profitable_coin = cWhattomine.get_most_profitable_coin()
     current_fs = cHive.get_current_fs()
     if current_fs not in config["COINS"]:
-        if not platform.__contains__('win'):
+        if platform.__contains__('linux'):
             os.system(
                 'message danger "Current flight sheet is not named properly. It should be the same as coins"')
         raise Exception(
             'Current flight sheet is not named properly. It should be the same as coins')
     if current_fs == most_profitable_coin:
-        if not platform.__contains__('win'):
+        if platform.__contains__('linux'):
             os.system(f'message info "{most_profitable_coin}"')
         return print("Current flight sheet is already the most profitable coin. Exiting")
     all_fs = cHive.get_all_fs()
     if not any(fs['name'] == most_profitable_coin for fs in all_fs):
-        if not platform.__contains__('win'):
+        if platform.__contains__('linux'):
             os.system(
                 'message danger "Most profitable coin not configured. Exiting"')
         return print("Most profitable coin not configured. Exiting")
     new_fs = [fs for fs in all_fs if fs.get(
         'name') == most_profitable_coin][0]
     cHive.set_current_fs(new_fs['id'])
-    if not platform.__contains__('win'):
+    if platform.__contains__('linux'):
         os.system(f'message success "{new_fs["name"]}"')
     print(f'New flight sheet {new_fs["name"]}')
     print("Done")
