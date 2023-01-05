@@ -17,9 +17,13 @@ This script is intend to use on the same machine's rig, but you can launch on an
 Preferable on the rig machine. You can either start a remote access hive shell or by local console
 
 1. Go to home directory<br>
-   `cd ~`
+   ```bash
+   cd ~
+   ```
 2. Clone this repo<br>
-   `git clone https://github.com/rotepfau/gpumining-profitswitcher.git`<br>
+   ```bash
+   git clone https://github.com/rotepfau/gpumining-profitswitcher.git
+   ```
 3. Copy _example.config.toml_, rename it to _config.toml_ and replace all items to yours configuration ie:<br>
 
    ```toml
@@ -34,13 +38,21 @@ Preferable on the rig machine. You can either start a remote access hive shell o
 
 4. Create [python virtual environment](https://docs.python.org/3/library/venv.html) and activate it
 5. Install dependencies<br>
-   `pip install -r requirements.txt`
+   ```bash
+   pip install -r requirements.txt
+   ```
 6. Edit crontab file to keep script running every hour<br>
-   `vi /hive/etc/crontab.root`<br>
+   ```bash
+   vi /hive/etc/crontab.root
+   ```
    or<br>
-   `nano /hive/etc/crontab.root`
+   ```bash
+   nano /hive/etc/crontab.root
+   ```
 7. Add this to the end of file<br>
-   `0 * * * * /home/user/gpumining-profitswitcher/.venv/bin/python /home/user/gpumining-profitswitcher/core.py &>> /home/user/crontab-profitswitcher.log`<br>
+   ```bash
+   0 * * * * /home/user/gpumining-profitswitcher/.venv/bin/python /home/user/gpumining-profitswitcher/core.py &>> /home/user/crontab-profitswitcher.log
+   ```
    \*Keep blank line on very last line of the file or will not work<br>
    \*\*If you wanna to change script interval take a look on [crontab-generator](https://crontab-generator.com)
 8. Reboot to crontab change take effect
