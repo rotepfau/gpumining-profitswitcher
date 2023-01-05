@@ -25,6 +25,7 @@ Preferable on the rig machine. You can either start a remote access hive shell o
 3. Copy _example.config.toml_, rename it to _config.toml_ and replace all items to yours configuration ie:<br>
 
    ```toml
+   HIVE_API_KEY = "eyMANYLETTERS..."
    FARM_NAME = "Joe's Farm"
    WORKER_NAME = "RIG01"
    COINS = ["Aeternity","Aion","Alephium","Beam","BitcoinGold","Ergo","EthereumClassic","Flux","Kaspa","Ravencoin","Zano"]
@@ -61,5 +62,6 @@ I develop just as a hobby, wondering if that could change on upcoming days. Cont
 
 ### **TODO**
 
-1. Take some screenshots
-2. Add some comments to be easier to new contributors
+- Take some screenshots
+- Add some comments to be easier to new collaborators
+- Video tutorial
