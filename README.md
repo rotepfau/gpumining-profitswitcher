@@ -58,6 +58,9 @@ Preferable on the rig machine. You can either start a remote access hive shell o
 
 ### **DISCLAIMER**
 
+USE AT YOUR OWN RISK<br>
+DON'T THRUST. **ALWAYS** VERIFY
+
 I develop just as a hobby, wondering if that could change on upcoming days. Contributions are very welcome, specially on this README (feel free to correct my BAD english).
 
 ### **TODO**
