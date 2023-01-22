@@ -1,2 +1,4 @@
 .venv
 config.toml
+database.db
+

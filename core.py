@@ -4,6 +4,7 @@ from requests import request, exceptions
 import os
 import tomllib
 from sys import platform
+import sqlite3
 
 with open('config.toml' if not platform.__contains__('linux') else '/home/user/gpumining-profitswitcher/config.toml', 'rb') as config_file:
     config = tomllib.load(config_file)
@@ -94,6 +95,17 @@ class Whattomine(object):
         return most_profitable_coin
 
 
+def set_database(coin: str):
+    con = sqlite3.connect('database.db')
+    cur = con.cursor()
+    cur.execute(
+        'CREATE TABLE IF NOT EXISTS data(id INTEGER PRIMARY KEY, date INTEGER, coin TEXT)')
+    cur.execute('INSERT INTO data(date, coin) VALUES(?, ?)',
+                (int(time()), coin))
+    con.commit()
+    con.close()
+
+
 def main():
     print(ctime(time()))
     cHive = Hive(config['HIVE_API_KEY'])
@@ -102,17 +114,20 @@ def main():
     current_fs = cHive.get_current_fs()
     if current_fs not in config['COINS']:
         if platform.__contains__('linux'):
+            set_database('NULL')
             os.system(
                 'message danger "Current flight sheet is not named properly. It should be the same as coins"')
         raise Exception(
             'Current flight sheet is not named properly. It should be the same as coins')
     if current_fs == most_profitable_coin:
         if platform.__contains__('linux'):
+            set_database(most_profitable_coin)
             os.system(f'message info "{most_profitable_coin}"')
         return print('Current flight sheet is already the most profitable coin. Exiting')
     all_fs = cHive.get_all_fs()
     if not any(fs['name'] == most_profitable_coin for fs in all_fs):
         if platform.__contains__('linux'):
+            set_database('NULL')
             os.system(
                 'message danger "Most profitable coin not configured. Exiting"')
         return print('Most profitable coin not configured. Exiting')
@@ -120,6 +135,7 @@ def main():
         'name') == most_profitable_coin][0]
     cHive.set_current_fs(new_fs['id'])
     if platform.__contains__('linux'):
+        set_database(most_profitable_coin)
         os.system(f'message success "{new_fs["name"]}"')
     print(f'New flight sheet {new_fs["name"]}')
     print('Done')

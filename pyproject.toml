@@ -1,0 +1,4 @@
+[tool.pyright]
+exclude = ["./.venv"]
+venvPath = "."
+venv = ".venv"
