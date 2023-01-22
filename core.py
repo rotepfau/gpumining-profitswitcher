@@ -96,7 +96,7 @@ class Whattomine(object):
 
 
 def set_database(coin: str):
-    con = sqlite3.connect('database.db')
+    con = sqlite3.connect('/home/user/gpumining-profitswitcher/database.db')
     cur = con.cursor()
     cur.execute(
         'CREATE TABLE IF NOT EXISTS data(id INTEGER PRIMARY KEY, date INTEGER, coin TEXT)')
