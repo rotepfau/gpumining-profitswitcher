@@ -1,13 +1,14 @@
 import sqlite3
-import sys
+from os import system
+from sys import argv
 from time import time
 
 
 def get_timeframe():
-    if len(sys.argv) != 2:
+    if len(argv) != 2:
         raise Exception('Missed timeframe parameter in days')
     now = int(time())
-    days_selected = int(sys.argv[1]) * 60 * 60 * 24
+    days_selected = int(argv[1]) * 60 * 60 * 24
     return (now - days_selected, )
 
 
@@ -23,9 +24,11 @@ def calculate_percents(rows_array):
     for timestamp in statistic.values():
         totaltime += timestamp
 
+    percenttime = f'{argv[1]} day(s)\n'
     for coin, timestamp in statistic.items():
         percent = timestamp / totaltime * 100
-        print(coin, int(percent))
+        percenttime += f'{int(percent)}% {coin} \n'
+    system(f'message warning "{percenttime}"')
 
 
 if __name__ == '__main__':
