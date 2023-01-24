@@ -3,7 +3,7 @@ import sys
 from time import time
 
 
-def getTimeFrame():
+def get_timeframe():
     if len(sys.argv) != 2:
         raise Exception('Missed timeframe parameter in days')
     now = int(time())
@@ -11,11 +11,8 @@ def getTimeFrame():
     return (now - days_selected, )
 
 
-if __name__ == '__main__':
+def calculate_percents(rows_array):
     statistic = dict()
-    con = sqlite3.connect('/home/user/gpumining-profitswitcher/database.db')
-    cur = con.cursor()
-    res = cur.execute('SELECT * FROM data WHERE date >= ?', (getTimeFrame())).fetchall()
     for i, data in enumerate(res[:-1]):
         timelength = res[i + 1][1] - data[1]
         if data[2] not in statistic:
@@ -28,4 +25,12 @@ if __name__ == '__main__':
 
     for coin, timestamp in statistic.items():
         percent = timestamp / totaltime
-        print(coin, percent)
+        print(coin, int(percent))
+
+
+if __name__ == '__main__':
+    con = sqlite3.connect('/home/user/gpumining-profitswitcher/database.db')
+    cur = con.cursor()
+    res = cur.execute('SELECT * FROM data WHERE date >= ?',
+                      (get_timeframe())).fetchall()
+    calculate_percents(res)
