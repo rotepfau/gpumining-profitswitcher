@@ -13,8 +13,8 @@ def get_timeframe():
 
 def calculate_percents(rows_array):
     statistic = dict()
-    for i, data in enumerate(res[:-1]):
-        timelength = res[i + 1][1] - data[1]
+    for i, data in enumerate(rows_array[:-1]):
+        timelength = rows_array[i + 1][1] - data[1]
         if data[2] not in statistic:
             statistic[data[2]] = 0
         statistic[data[2]] += timelength
