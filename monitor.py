@@ -8,16 +8,14 @@ def getTimeFrame():
         raise Exception('Missed timeframe parameter in days')
     now = int(time())
     days_selected = int(sys.argv[1]) * 60 * 60 * 24
-    return str(now - days_selected)
+    return (now - days_selected, )
 
 
 if __name__ == '__main__':
-    timeframe = getTimeFrame()
     statistic = dict()
     con = sqlite3.connect('/home/user/gpumining-profitswitcher/database.db')
     cur = con.cursor()
-    res = cur.execute('SELECT * FROM data WHERE date >= ?',
-                      (timeframe)).fetchall()
+    res = cur.execute('SELECT * FROM data WHERE date >= ?', (getTimeFrame())).fetchall()
     for i, data in enumerate(res[:-1]):
         timelength = res[i + 1][1] - data[1]
         if data[2] not in statistic:
