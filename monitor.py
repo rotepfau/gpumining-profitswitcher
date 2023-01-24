@@ -17,7 +17,7 @@ if __name__ == '__main__':
     con = sqlite3.connect('/home/user/gpumining-profitswitcher/database.db')
     cur = con.cursor()
     res = cur.execute('SELECT * FROM data WHERE date >= ?',
-                      timeframe).fetchall()
+                      (timeframe)).fetchall()
     for i, data in enumerate(res[:-1]):
         timelength = res[i + 1][1] - data[1]
         if data[2] not in statistic:
