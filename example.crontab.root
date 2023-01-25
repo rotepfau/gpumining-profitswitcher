@@ -1,3 +1,3 @@
 # gpumining-profitswitcher
 6-59/15 * * * * /home/user/gpumining-profitswitcher/.venv/bin/python /home/user/gpumining-profitswitcher/core.py >> /home/user/crontab-profitswitcher.log 2>&1
-0 20 * * * /home/user/gpumining-autotrade/.venv/bin/python /home/user/gpumining-autotrade/monitor.py 1
+0 20 * * * /home/user/gpumining-profitswitcher/.venv/bin/python /home/user/gpumining-profitswitcher/monitor.py 1

@@ -51,7 +51,7 @@ Preferable on the rig machine. You can either start a remote access hive shell o
 7. Add this to the end of file<br>
    ```vim
    0 * * * * /home/user/gpumining-profitswitcher/.venv/bin/python /home/user/gpumining-profitswitcher/core.py &>> /home/user/crontab-profitswitcher.log
-   0 20 * * * /home/user/gpumining-autotrade/.venv/bin/python /home/user/gpumining-autotrade/monitor.py 1
+   0 20 * * * /home/user/gpumining-profitswitcher/.venv/bin/python /home/user/gpumining-profitswitcher/monitor.py 1
    ```
    \*Keep blank line on very last line of the file or will not work<br>
    \*\*If you wanna to change script interval take a look on [crontab-generator](https://crontab-generator.com)
