@@ -25,10 +25,10 @@ def calculate_percents(rows_array):
     for timestamp in statistic.values():
         totaltime += timestamp
 
-    percentvalue = int(time())
+    timeframevalue = int(time() / 60 / 60 * 24)
     if len(argv) == 2:
-        percentvalue = argv[1]
-    percenttime = f'{percentvalue} day(s)\n'
+        timeframevalue = argv[1]
+    percenttime = f'{timeframevalue} day(s)\n'
     for coin, timestamp in statistic.items():
         percent = timestamp / totaltime * 100
         percenttime += f'{int(percent)}% {coin} \n'
