@@ -8,7 +8,7 @@ def get_timeframe():
     now = int(time())
     if len(argv) != 2 or type(argv[1]) != int:
         print('Timeframe not selected, using all values from table')
-        return (now, )
+        return (0, )
     days_selected = int(argv[1]) * 60 * 60 * 24
     return (now - days_selected, )
 
