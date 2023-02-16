@@ -25,7 +25,9 @@ def calculate_percents(rows_array):
     for timestamp in statistic.values():
         totaltime += timestamp
 
-    percentvalue = argv[1] or int(time())
+    percentvalue = int(time())
+    if argv[1]:
+        percentvalue = argv[1]
     percenttime = f'{percentvalue} day(s)\n'
     for coin, timestamp in statistic.items():
         percent = timestamp / totaltime * 100
