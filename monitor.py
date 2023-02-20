@@ -6,7 +6,7 @@ from time import time
 
 def get_timeframe():
     now = int(time())
-    if len(argv) != 2 or type(argv[1]) != int:
+    if len(argv) != 2:
         print('Timeframe not selected, using all values from table')
         return (0, )
     days_selected = int(argv[1]) * 60 * 60 * 24
@@ -38,6 +38,7 @@ def calculate_percents(rows_array):
 if __name__ == '__main__':
     con = sqlite3.connect('/home/user/gpumining-profitswitcher/database.db')
     cur = con.cursor()
+    print(get_timeframe())
     res = cur.execute('SELECT * FROM data WHERE date >= ?',
                       (get_timeframe())).fetchall()
     calculate_percents(res)
